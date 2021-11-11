@@ -6,4 +6,5 @@ set(CMAKE_CXX_STANDARD 20)
 add_subdirectory(Game)
 add_executable(Snake main.cpp)
 
+include_directories(Game)
 target_link_libraries(Snake SnakeGame)

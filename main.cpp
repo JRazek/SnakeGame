@@ -1,5 +1,5 @@
-#include "Game/SnakeGame.h"
-#include "Game/SnakeGameVisualiser.h"
+#include <SnakeGame.h>
+#include <SnakeGameVisualiser.h>
 
 using namespace sng;
 using namespace std;
