@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD 20)
 add_subdirectory(Game)
 add_executable(Snake main.cpp)
 
-target_link_libraries(Snake ${SFML_LIBRARIES} ${SFML_DEPENDENCIES} SnakeGame)
+target_link_libraries(Snake SnakeGame)

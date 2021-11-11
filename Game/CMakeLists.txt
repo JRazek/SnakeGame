@@ -3,7 +3,7 @@ project(SnakeGame)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_library(SnakeGame Utils.h Utils.cpp SnakeGame.h SnakeGame.cpp)
+add_library(SnakeGame Utils.h Utils.cpp SnakeGame.h SnakeGame.cpp SnakeGameVisualiser.h SnakeGameVisualiser.cpp)
 
 find_package (SFML REQUIRED system window graphics network audio)
 include_directories(${SFML_INCLUDE_DIR})
