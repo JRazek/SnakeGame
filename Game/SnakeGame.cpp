@@ -6,6 +6,9 @@
 
 
 void sng::SnakeGame::incTimeStep() {
+    if(lostGame)
+        return;
+
     constexpr static auto pointOK = [](const Vector2i& p, int _sizeX, int _sizeY){
         return p.x >= 0 && p.x < _sizeX && p.y >= 0 && p.y < _sizeY;
     };
@@ -49,4 +52,10 @@ const sng::SnakeObj& sng::SnakeGame::getSnake() const noexcept {
 
 const sng::Vec2Set& sng::SnakeGame::getApples() const noexcept {
     return apples;
+}
+
+void sng::SnakeGame::setDirection(int _direction) {
+    if(direction >= 4)
+        throw std::logic_error("direction must be in a range [0, 1] !");
+    direction = _direction;
 }

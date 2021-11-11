@@ -15,7 +15,9 @@ namespace sng {
         template<typename T>
         struct Vector2{
             T x, y;
-            bool operator==(const Vector2& v1) const noexcept;
+            bool operator==(const Vector2& v1) const noexcept {
+                return x == v1.x && y == v1.y;
+            }
         };
     };
 
@@ -29,13 +31,6 @@ namespace sng {
     using Vec2Set = std::unordered_set<Utils::Vector2<int>, decltype(hashVector2i)>;
     using SnakeObj = std::deque<Utils::Vector2<int>>;
 
-}
-
-
-
-template<typename T>
-bool sng::Utils::Vector2<T>::operator==(const sng::Utils::Vector2<T> &v1) const noexcept {
-    return x == v1.x && y == v1.y;
 }
 
 #endif //SNAKE_UTILS_H
