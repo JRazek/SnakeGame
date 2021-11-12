@@ -35,21 +35,27 @@ void sng::SnakeGameVisualiser::run(float frameRate) {
         while(window.pollEvent(eventHandler))
             if(eventHandler.type == sf::Event::Closed){
                 window.close();
-                std::cout<<eventHandler.type<<"\n";
                 break;
             } else if(eventHandler.type == sf::Event::KeyPressed){
                 switch (eventHandler.key.code) {
                     case sf::Keyboard::Up:
-                        snakeGame.setDirection(SnakeDirection::UP);
+                        if(snakeGame.getDirection() != SnakeDirection::DOWN)
+                            snakeGame.setDirection(SnakeDirection::UP);
                         break;
                     case sf::Keyboard::Right:
-                        snakeGame.setDirection(SnakeDirection::RIGHT);
+                        if(snakeGame.getDirection() != SnakeDirection::LEFT)
+                            snakeGame.setDirection(SnakeDirection::RIGHT);
                         break;
                     case sf::Keyboard::Down:
-                        snakeGame.setDirection(SnakeDirection::DOWN);
+                        if(snakeGame.getDirection() != SnakeDirection::UP)
+                            snakeGame.setDirection(SnakeDirection::DOWN);
                         break;
                     case sf::Keyboard::Left:
-                        snakeGame.setDirection(SnakeDirection::LEFT);
+                        if(snakeGame.getDirection() != SnakeDirection::RIGHT)
+                            snakeGame.setDirection(SnakeDirection::LEFT);
+                        break;
+                    case sf::Keyboard::Escape:
+                        window.close();
                         break;
                     default:
                         break;

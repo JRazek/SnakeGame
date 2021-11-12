@@ -6,8 +6,8 @@
 
 
 void sng::SnakeGame::incTimeStep() {
-    constexpr static auto pointOK = [](const Vector2<int>& p, int _sizeX, int _sizeY){
-        return p.x >= 0 && p.x < _sizeX && p.y >= 0 && p.y < _sizeY;
+    constexpr static auto pointOK = [](const Vector2<int>& p, int _sizeX, int _sizeY, const Vec2Set& snakePoints){
+        return p.x >= 0 && p.x < _sizeX && p.y >= 0 && p.y < _sizeY && !snakePoints.contains(p);
     };
 
     Vector2<int> next = snake.front();
@@ -21,8 +21,10 @@ void sng::SnakeGame::incTimeStep() {
         next.x -= 1;
     }
     if(solidWalls){
-        if(pointOK(next, mapSize.x, mapSize.y))
+        if(pointOK(next, mapSize.x, mapSize.y, snakePoints)) {
             snake.push_front(next);
+            snakePoints.insert(next);
+        }
         else
             gameStatus = GameStatus::LOST;
     }else{
@@ -33,6 +35,7 @@ void sng::SnakeGame::incTimeStep() {
         spawnApple();
     }
     else if(gameStatus != GameStatus::LOST){
+        snakePoints.erase(snake.back());
         snake.pop_back();
     }
 }
@@ -56,7 +59,7 @@ const sng::Vec2Set& sng::SnakeGame::getApples() const noexcept {
     return apples;
 }
 
-void sng::SnakeGame::setDirection(SnakeDirection _direction) {
+void sng::SnakeGame::setDirection(SnakeDirection _direction) noexcept {
     direction = _direction;
 }
 
@@ -68,4 +71,8 @@ void sng::SnakeGame::spawnApple() noexcept {
 
 GameStatus sng::SnakeGame::getGameStatus() const noexcept {
     return gameStatus;
+}
+
+SnakeDirection sng::SnakeGame::getDirection() const noexcept {
+    return direction;
 }

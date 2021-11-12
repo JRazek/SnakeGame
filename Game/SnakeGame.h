@@ -23,13 +23,15 @@ namespace sng {
         std::default_random_engine engine;
 
         Vec2Set apples;
+        Vec2Set snakePoints;
         SnakeObj snake;
 
     public:
         SnakeGame(int _sizeX, int _sizeY, int seed = 1, bool _solidWalls = true) noexcept;
         void incTimeStep();
         void spawnApple() noexcept;
-        void setDirection(SnakeDirection direction);
+        void setDirection(SnakeDirection direction) noexcept;
+        SnakeDirection getDirection() const noexcept;
         Vector2i getMapSize() const noexcept;
         const SnakeObj& getSnake() const noexcept;
         const Vec2Set& getApples() const noexcept;
