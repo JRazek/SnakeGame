@@ -33,6 +33,7 @@ void sng::SnakeGame::incTimeStep() {
     if(apples.find(next) != apples.end()) {
         apples.erase(next);
         spawnApple();
+        score++;
     }
     else if(gameStatus != GameStatus::LOST){
         snakePoints.erase(snake.back());

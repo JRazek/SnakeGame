@@ -22,6 +22,7 @@ namespace sng {
         GameStatus gameStatus = GameStatus::WAITS;
         std::default_random_engine engine;
 
+        int score = 0;
         Vec2Set apples;
         Vec2Set snakePoints;
         SnakeObj snake;
