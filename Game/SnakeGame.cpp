@@ -9,11 +9,11 @@ void sng::SnakeGame::incTimeStep() {
     if(lostGame)
         return;
 
-    constexpr static auto pointOK = [](const Vector2i& p, int _sizeX, int _sizeY){
+    constexpr static auto pointOK = [](const Vector2<int>& p, int _sizeX, int _sizeY){
         return p.x >= 0 && p.x < _sizeX && p.y >= 0 && p.y < _sizeY;
     };
 
-    Vector2i next = snake.front();
+    Vector2<int> next = snake.front();
     if(direction == 0){
         next.y -= 1;
     }else if(direction == 1){
