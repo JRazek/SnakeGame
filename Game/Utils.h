@@ -21,7 +21,7 @@ namespace sng {
     };
 
     struct hashVector2i{
-        std::size_t operator()(const Vector2<int>& v){
+        std::size_t operator()(const Vector2<int>& v) const {
             size_t xHash = std::hash<int>()(v.x);
             size_t yHash = std::hash<int>()(v.y)/2;
             return xHash^yHash;

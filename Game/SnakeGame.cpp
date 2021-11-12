@@ -31,10 +31,10 @@ void sng::SnakeGame::incTimeStep() {
     }else{
         throw std::logic_error("NOT IMPLEMENTED!");
     }
-//    if(apples.find(next) != apples.end())
-//        apples.erase(next);
-//    else
-//        snake.pop_back();
+    if(apples.find(next) != apples.end())
+        apples.erase(next);
+    else
+        snake.pop_back();
 }
 
 sng::SnakeGame::SnakeGame(int _sizeX, int _sizeY, bool _solidWalls) noexcept:
