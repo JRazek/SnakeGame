@@ -15,12 +15,19 @@ namespace sng {
         sf::Color snakeColor = sf::Color::Green;
         sf::Color applesColor = sf::Color::Red;
         sf::Color backgroundColor = sf::Color(128, 128, 128);
+        sf::Clock clock;
+//        sf::Event eventHandler;
 
         const SnakeGame &snakeGame;
         sf::RenderWindow window;
         static constexpr Vector2f tileSize{10, 10};
     public:
         explicit SnakeGameVisualiser(const SnakeGame &snakeGame, const std::string& windowName = "snake game");
+
+        /**
+         * runs async
+         */
+        void run(float frameRate);
         void draw();
     };
 }

@@ -3,6 +3,7 @@
 //
 
 #include "SnakeGameVisualiser.h"
+#include <thread>
 
 sng::SnakeGameVisualiser::SnakeGameVisualiser(const SnakeGame &snakeGame, const std::string& _windowName) :
         snakeGame(snakeGame),
@@ -11,17 +12,30 @@ sng::SnakeGameVisualiser::SnakeGameVisualiser(const SnakeGame &snakeGame, const 
 
 void sng::SnakeGameVisualiser::draw() {
     window.clear(backgroundColor);
-    for(auto &s : snakeGame.getSnake()){
+    for (auto &s : snakeGame.getSnake()) {
         sf::RectangleShape rectangleShape({tileSize.x, tileSize.y});
         rectangleShape.setFillColor(snakeColor);
         rectangleShape.setPosition({static_cast<float >(s.x), static_cast<float>(s.y)});
         window.draw(rectangleShape);
     }
-    for(auto &a : snakeGame.getApples()){
+    for (auto &a : snakeGame.getApples()) {
         sf::RectangleShape rectangleShape({tileSize.x, tileSize.y});
         rectangleShape.setFillColor(applesColor);
         rectangleShape.setPosition({static_cast<float >(a.x), static_cast<float>(a.y)});
         window.draw(rectangleShape);
     }
+
     window.display();
+}
+
+void sng::SnakeGameVisualiser::run(float frameRate) {
+    std::thread thread([&](){
+        while (window.isOpen()){
+            if(clock.getElapsedTime().asMilliseconds() >= 1.f/frameRate) {
+                draw();
+                clock.restart();
+            }
+        }
+    });
+    thread.detach();
 }
