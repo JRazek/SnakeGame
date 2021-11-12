@@ -8,15 +8,14 @@
 #include <deque>
 #include <unordered_set>
 #include "Utils.h"
+#include "SnakeDirection.h"
 
 namespace sng {
     class SnakeGame {
         using Vector2i = sng::Vector2<int>;
         Vector2i mapSize;
-        /**
-         * 0 - up, 1 - right, 2 - down, 3 - left
-         */
-        int direction = 0;
+
+        SnakeDirection direction = SnakeDirection::UP;
         bool solidWalls;
         bool lostGame = false;
 
@@ -26,7 +25,7 @@ namespace sng {
     public:
         SnakeGame(int _sizeX, int _sizeY, bool _solidWalls = true) noexcept;
         void incTimeStep();
-        void setDirection(int direction);
+        void setDirection(SnakeDirection direction);
         Vector2i getMapSize() const noexcept;
         const SnakeObj& getSnake() const noexcept;
         const Vec2Set& getApples() const noexcept;

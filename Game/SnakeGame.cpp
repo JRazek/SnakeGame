@@ -14,13 +14,13 @@ void sng::SnakeGame::incTimeStep() {
     };
 
     Vector2<int> next = snake.front();
-    if(direction == 0){
+    if(direction == SnakeDirection::UP){
         next.y -= 1;
-    }else if(direction == 1){
+    }else if(direction == SnakeDirection::RIGHT){
         next.x += 1;
-    }else if(direction == 2){
+    }else if(direction == SnakeDirection::DOWN){
         next.y += 1;
-    }else{
+    }else if (direction == SnakeDirection::LEFT){
         next.x -= 1;
     }
     if(solidWalls){
@@ -31,10 +31,10 @@ void sng::SnakeGame::incTimeStep() {
     }else{
         throw std::logic_error("NOT IMPLEMENTED!");
     }
-    if(apples.find(next) != apples.end())
-        apples.erase(next);
-    else
-        snake.pop_back();
+//    if(apples.find(next) != apples.end())
+//        apples.erase(next);
+//    else
+//        snake.pop_back();
 }
 
 sng::SnakeGame::SnakeGame(int _sizeX, int _sizeY, bool _solidWalls) noexcept:
@@ -54,8 +54,6 @@ const sng::Vec2Set& sng::SnakeGame::getApples() const noexcept {
     return apples;
 }
 
-void sng::SnakeGame::setDirection(int _direction) {
-    if(direction >= 4)
-        throw std::logic_error("direction must be in a range [0, 1] !");
+void sng::SnakeGame::setDirection(SnakeDirection _direction) {
     direction = _direction;
 }
