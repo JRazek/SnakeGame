@@ -38,9 +38,10 @@ void sng::SnakeGame::incTimeStep() {
 }
 
 sng::SnakeGame::SnakeGame(int _sizeX, int _sizeY, bool _solidWalls) noexcept:
-        mapSize{_sizeX, _sizeY},
-        solidWalls(_solidWalls)
-{}
+mapSize{_sizeX, _sizeY},
+solidWalls(_solidWalls){
+    snake.push_front(mapSize/2);
+}
 
 sng::SnakeGame::Vector2i sng::SnakeGame::getMapSize() const noexcept {
     return mapSize;

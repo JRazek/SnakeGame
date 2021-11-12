@@ -7,6 +7,7 @@
 
 #include "SnakeGame.h"
 #include <SFML/Graphics.hpp>
+#include <thread>
 
 namespace sng {
     class SnakeGameVisualiser {

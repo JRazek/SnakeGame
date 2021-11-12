@@ -6,6 +6,6 @@ using namespace std;
 int main() {
     SnakeGame snakeGame(100, 100);
     SnakeGameVisualiser snakeGameVisualiser(snakeGame);
-    snakeGameVisualiser.draw();
+    snakeGameVisualiser.run(2);
     return 0;
 }

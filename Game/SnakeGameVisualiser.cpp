@@ -15,13 +15,13 @@ void sng::SnakeGameVisualiser::draw() {
     for (auto &s : snakeGame.getSnake()) {
         sf::RectangleShape rectangleShape({tileSize.x, tileSize.y});
         rectangleShape.setFillColor(snakeColor);
-        rectangleShape.setPosition({static_cast<float >(s.x), static_cast<float>(s.y)});
+        rectangleShape.setPosition({static_cast<float >(s.x)*tileSize.x, static_cast<float>(s.y)*tileSize.y});
         window.draw(rectangleShape);
     }
     for (auto &a : snakeGame.getApples()) {
         sf::RectangleShape rectangleShape({tileSize.x, tileSize.y});
         rectangleShape.setFillColor(applesColor);
-        rectangleShape.setPosition({static_cast<float >(a.x), static_cast<float>(a.y)});
+        rectangleShape.setPosition({static_cast<float >(a.x)*tileSize.x, static_cast<float>(a.y)*tileSize.y});
         window.draw(rectangleShape);
     }
 
@@ -29,13 +29,10 @@ void sng::SnakeGameVisualiser::draw() {
 }
 
 void sng::SnakeGameVisualiser::run(float frameRate) {
-    std::thread thread([&](){
-        while (window.isOpen()){
-            if(clock.getElapsedTime().asMilliseconds() >= 1.f/frameRate) {
-                draw();
-                clock.restart();
-            }
+    while (window.isOpen()){
+        if(clock.getElapsedTime().asMilliseconds() >= 1.f/frameRate) {
+            draw();
+            clock.restart();
         }
-    });
-    thread.detach();
+    }
 }

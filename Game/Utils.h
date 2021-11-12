@@ -18,6 +18,9 @@ namespace sng {
         bool operator==(const Vector2<int>& v2) const noexcept {
             return x == v2.x && y == v2.y;
         }
+        Vector2 operator/(int d) const noexcept{
+            return {x/d, y/d};
+        }
     };
 
     struct hashVector2i{
