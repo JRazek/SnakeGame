@@ -37,9 +37,27 @@ void sng::SnakeGameVisualiser::run(float frameRate) {
                 window.close();
                 std::cout<<eventHandler.type<<"\n";
                 break;
+            } else if(eventHandler.type == sf::Event::KeyPressed){
+                switch (eventHandler.key.code) {
+                    case sf::Keyboard::Up:
+                        snakeGame.setDirection(SnakeDirection::UP);
+                        break;
+                    case sf::Keyboard::Right:
+                        snakeGame.setDirection(SnakeDirection::RIGHT);
+                        break;
+                    case sf::Keyboard::Down:
+                        snakeGame.setDirection(SnakeDirection::DOWN);
+                        break;
+                    case sf::Keyboard::Left:
+                        snakeGame.setDirection(SnakeDirection::LEFT);
+                        break;
+                    default:
+                        break;
+                }
             }
         if(clock.getElapsedTime().asMilliseconds() >= 1000.f/frameRate) {
-            snakeGame.incTimeStep();
+            if(snakeGame.getGameStatus() != GameStatus::LOST)
+                snakeGame.incTimeStep();
             draw();
             clock.restart();
         }

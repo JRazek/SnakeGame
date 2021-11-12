@@ -27,9 +27,6 @@ namespace sng {
     public:
         explicit SnakeGameVisualiser(SnakeGame &snakeGame, const std::string& windowName = "snake game");
 
-        /**
-         * runs async
-         */
         void run(float frameRate);
         void draw();
     };

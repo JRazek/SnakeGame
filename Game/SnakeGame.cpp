@@ -6,9 +6,6 @@
 
 
 void sng::SnakeGame::incTimeStep() {
-    if(lostGame)
-        return;
-
     constexpr static auto pointOK = [](const Vector2<int>& p, int _sizeX, int _sizeY){
         return p.x >= 0 && p.x < _sizeX && p.y >= 0 && p.y < _sizeY;
     };
@@ -27,7 +24,7 @@ void sng::SnakeGame::incTimeStep() {
         if(pointOK(next, mapSize.x, mapSize.y))
             snake.push_front(next);
         else
-            lostGame = true;
+            gameStatus = GameStatus::LOST;
     }else{
         throw std::logic_error("NOT IMPLEMENTED!");
     }
@@ -35,8 +32,9 @@ void sng::SnakeGame::incTimeStep() {
         apples.erase(next);
         spawnApple();
     }
-    else
+    else if(gameStatus != GameStatus::LOST){
         snake.pop_back();
+    }
 }
 
 sng::SnakeGame::SnakeGame(int _sizeX, int _sizeY, int seed, bool _solidWalls) noexcept:
@@ -66,4 +64,8 @@ void sng::SnakeGame::spawnApple() noexcept {
     std::uniform_int_distribution<> distributionX(0, mapSize.x);
     std::uniform_int_distribution<> distributionY(0, mapSize.y);
     apples.insert({distributionX(engine), distributionY(engine)});
+}
+
+GameStatus sng::SnakeGame::getGameStatus() const noexcept {
+    return gameStatus;
 }

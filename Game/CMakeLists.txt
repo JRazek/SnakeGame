@@ -7,6 +7,6 @@ find_package(SFML 2.5.1 COMPONENTS system graphics audio network REQUIRED)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -Wall -Wextra -Werror=vla")
 
-add_library(SnakeGame Utils.h Utils.cpp SnakeGame.h SnakeGame.cpp SnakeGameVisualiser.h SnakeGameVisualiser.cpp SnakeDirection.h)
+add_library(SnakeGame Utils.h Utils.cpp SnakeGame.h SnakeGame.cpp SnakeGameVisualiser.h SnakeGameVisualiser.cpp SnakeDirection.h GameStatus.h)
 
 target_link_libraries(SnakeGame sfml-system sfml-graphics sfml-window)
