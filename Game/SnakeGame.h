@@ -11,7 +11,7 @@
 
 namespace sng {
     class SnakeGame {
-        using Vector2i = sng::Utils::Vector2<int>;
+        using Vector2i = sng::Vector2<int>;
         Vector2i mapSize;
         /**
          * 0 - up, 1 - right, 2 - down, 3 - left

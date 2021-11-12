@@ -10,8 +10,8 @@
 
 namespace sng {
     class SnakeGameVisualiser {
-        using Vector2i = sng::Utils::Vector2<int>;
-        using Vector2f = sng::Utils::Vector2<float>;
+        using Vector2i = sng::Vector2<int>;
+        using Vector2f = sng::Vector2<float>;
         sf::Color snakeColor = sf::Color::Green;
         sf::Color applesColor = sf::Color::Red;
         sf::Color backgroundColor = sf::Color(128, 128, 128);
