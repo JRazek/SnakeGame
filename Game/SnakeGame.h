@@ -9,6 +9,7 @@
 #include <unordered_set>
 #include "Utils.h"
 #include "SnakeDirection.h"
+#include <random>
 
 namespace sng {
     class SnakeGame {
@@ -18,13 +19,15 @@ namespace sng {
         SnakeDirection direction = SnakeDirection::UP;
         bool solidWalls;
         bool lostGame = false;
+        std::default_random_engine engine;
 
         Vec2Set apples;
         SnakeObj snake;
 
     public:
-        SnakeGame(int _sizeX, int _sizeY, bool _solidWalls = true) noexcept;
+        SnakeGame(int _sizeX, int _sizeY, int seed = 1, bool _solidWalls = true) noexcept;
         void incTimeStep();
+        void spawnApple() noexcept;
         void setDirection(SnakeDirection direction);
         Vector2i getMapSize() const noexcept;
         const SnakeObj& getSnake() const noexcept;

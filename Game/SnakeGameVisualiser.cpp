@@ -4,10 +4,12 @@
 
 #include "SnakeGameVisualiser.h"
 #include <thread>
+#include <iostream>
 
-sng::SnakeGameVisualiser::SnakeGameVisualiser(const SnakeGame &snakeGame, const std::string& _windowName) :
+sng::SnakeGameVisualiser::SnakeGameVisualiser(SnakeGame &snakeGame, const std::string& _windowName) :
         snakeGame(snakeGame),
-        window(sf::VideoMode(snakeGame.getMapSize().x * static_cast<int>(tileSize.x), snakeGame.getMapSize().y * static_cast<int>(tileSize.y)), _windowName)
+        window(sf::VideoMode(snakeGame.getMapSize().x * static_cast<int>(tileSize.x), snakeGame.getMapSize().y * static_cast<int>(tileSize.y)), _windowName),
+        eventHandler()
 {}
 
 void sng::SnakeGameVisualiser::draw() {
@@ -30,7 +32,14 @@ void sng::SnakeGameVisualiser::draw() {
 
 void sng::SnakeGameVisualiser::run(float frameRate) {
     while (window.isOpen()){
-        if(clock.getElapsedTime().asMilliseconds() >= 1.f/frameRate) {
+        while(window.pollEvent(eventHandler))
+            if(eventHandler.type == sf::Event::Closed){
+                window.close();
+                std::cout<<eventHandler.type<<"\n";
+                break;
+            }
+        if(clock.getElapsedTime().asMilliseconds() >= 1000.f/frameRate) {
+            snakeGame.incTimeStep();
             draw();
             clock.restart();
         }

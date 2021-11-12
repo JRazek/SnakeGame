@@ -31,15 +31,18 @@ void sng::SnakeGame::incTimeStep() {
     }else{
         throw std::logic_error("NOT IMPLEMENTED!");
     }
-    if(apples.find(next) != apples.end())
+    if(apples.find(next) != apples.end()) {
         apples.erase(next);
+        spawnApple();
+    }
     else
         snake.pop_back();
 }
 
-sng::SnakeGame::SnakeGame(int _sizeX, int _sizeY, bool _solidWalls) noexcept:
+sng::SnakeGame::SnakeGame(int _sizeX, int _sizeY, int seed, bool _solidWalls) noexcept:
 mapSize{_sizeX, _sizeY},
-solidWalls(_solidWalls){
+solidWalls(_solidWalls),
+engine(seed){
     snake.push_front(mapSize/2);
 }
 
@@ -57,4 +60,10 @@ const sng::Vec2Set& sng::SnakeGame::getApples() const noexcept {
 
 void sng::SnakeGame::setDirection(SnakeDirection _direction) {
     direction = _direction;
+}
+
+void sng::SnakeGame::spawnApple() noexcept {
+    std::uniform_int_distribution<> distributionX(0, mapSize.x);
+    std::uniform_int_distribution<> distributionY(0, mapSize.y);
+    apples.insert({distributionX(engine), distributionY(engine)});
 }
