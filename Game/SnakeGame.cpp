@@ -2,12 +2,13 @@
 // Created by user on 11.11.2021.
 //
 
+#include <iostream>
 #include "SnakeGame.h"
 
 
 void sng::SnakeGame::incTimeStep() {
-    constexpr static auto pointOK = [](const Vector2<int>& p, int _sizeX, int _sizeY, const Vec2Set& snakePoints){
-        return p.x >= 0 && p.x < _sizeX && p.y >= 0 && p.y < _sizeY && !snakePoints.contains(p);
+    constexpr static auto pointOK = [](const Vector2<int>& p, int _sizeX, int _sizeY, const Vec2Set& _snakePoints){
+        return p.x >= 0 && p.x < _sizeX && p.y >= 0 && p.y < _sizeY && !_snakePoints.contains(p);
     };
 
     Vector2<int> next = snake.front();
@@ -20,19 +21,22 @@ void sng::SnakeGame::incTimeStep() {
     }else if (direction == SnakeDirection::LEFT){
         next.x -= 1;
     }
-    if(solidWalls){
-        if(pointOK(next, mapSize.x, mapSize.y, snakePoints)) {
-            snake.push_front(next);
-            snakePoints.insert(next);
-        }
-        else
-            gameStatus = GameStatus::LOST;
-    }else{
-        throw std::logic_error("NOT IMPLEMENTED!");
+    if(!solidWalls){
+        next.x = (next.x + mapSize.x) % mapSize.x;
+        next.y = (next.y + mapSize.y) % mapSize.y;
     }
+    if(pointOK(next, mapSize.x, mapSize.y, snakePoints)) {
+        snake.push_front(next);
+        snakePoints.insert(next);
+    }
+    else
+        gameStatus = GameStatus::LOST;
     if(apples.find(next) != apples.end()) {
         apples.erase(next);
         spawnApple();
+        if(apples.size() == 1){
+            std::cout<<"here";
+        }
         score++;
     }
     else if(gameStatus != GameStatus::LOST){
@@ -65,8 +69,8 @@ void sng::SnakeGame::setDirection(SnakeDirection _direction) noexcept {
 }
 
 void sng::SnakeGame::spawnApple() noexcept {
-    std::uniform_int_distribution<> distributionX(0, mapSize.x);
-    std::uniform_int_distribution<> distributionY(0, mapSize.y);
+    std::uniform_int_distribution<> distributionX(0, mapSize.x-1);
+    std::uniform_int_distribution<> distributionY(0, mapSize.y-1);
     apples.insert({distributionX(engine), distributionY(engine)});
 }
 
