@@ -8,6 +8,7 @@
 #include <zconf.h>
 #include <unordered_set>
 #include <deque>
+#include <vector>
 
 namespace sng {
     using byte = unsigned char;
@@ -32,6 +33,7 @@ namespace sng {
     };
     using Vec2Set = std::unordered_set<Vector2<int>, hashVector2i>;
     using SnakeObj = std::deque<Vector2<int>>;
+    using Bitmap = std::vector<std::vector<byte>>;
 
 }
 

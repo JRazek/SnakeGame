@@ -81,3 +81,14 @@ GameStatus sng::SnakeGame::getGameStatus() const noexcept {
 SnakeDirection sng::SnakeGame::getDirection() const noexcept {
     return direction;
 }
+
+sng::Bitmap sng::SnakeGame::buildStateBitmap() const noexcept {
+    Bitmap bitmap(mapSize.x, std::vector<byte>(mapSize.y, 0));
+    for(auto &a : apples){
+        bitmap[a.x][a.y] = 1;
+    }
+    for(auto &s : snakePoints){
+        bitmap[s.x][s.y] = 2;
+    }
+    return bitmap;
+}

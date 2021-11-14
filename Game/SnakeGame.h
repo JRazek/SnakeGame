@@ -37,6 +37,13 @@ namespace sng {
         const SnakeObj& getSnake() const noexcept;
         const Vec2Set& getApples() const noexcept;
         GameStatus getGameStatus() const noexcept;
+
+        /**
+         * N-sizeX, M-sizeY
+         * it takes O(N*M) time and slows down the performance!
+         * @return states of each cell on a map. 0 - empty, 1 - apple, 2 - snake. Snake is always above apple.
+         */
+        Bitmap buildStateBitmap() const noexcept;
     };
 }
 
