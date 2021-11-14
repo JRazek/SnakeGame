@@ -35,9 +35,6 @@ void sng::SnakeGame::incTimeStep() {
     if(apples.find(next) != apples.end()) {
         apples.erase(next);
         spawnApple();
-        if(apples.size() == 1){
-            std::cout<<"here";
-        }
         score++;
     }
     else if(gameStatus != GameStatus::LOST){
