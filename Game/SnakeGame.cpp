@@ -10,7 +10,7 @@ void sng::SnakeGame::incTimeStep() {
     constexpr static auto pointOK = [](const Vector2<int>& p, int _sizeX, int _sizeY, const Vec2Set& _snakePoints){
         return p.x >= 0 && p.x < _sizeX && p.y >= 0 && p.y < _sizeY && !_snakePoints.contains(p);
     };
-
+    direction = bufferedDirection;
     Vector2<int> next = snake.front();
     if(direction == SnakeDirection::UP){
         next.y -= 1;
@@ -48,6 +48,7 @@ mapSize{_sizeX, _sizeY},
 solidWalls(_solidWalls),
 engine(seed){
     snake.push_front(mapSize/2);
+    bufferedDirection = direction;
 }
 
 sng::SnakeGame::Vector2i sng::SnakeGame::getMapSize() const noexcept {
@@ -63,9 +64,13 @@ const sng::Vec2Set& sng::SnakeGame::getApples() const noexcept {
 }
 
 void sng::SnakeGame::setDirection(SnakeDirection _direction) noexcept {
-    direction = _direction;
+    if ((
+            _direction == SnakeDirection::UP && direction != SnakeDirection::DOWN)
+        || (_direction == SnakeDirection::DOWN && direction != SnakeDirection::UP)
+        || (_direction == SnakeDirection::RIGHT && direction != SnakeDirection::LEFT)
+        || (_direction == SnakeDirection::LEFT && direction != SnakeDirection::RIGHT))
+        bufferedDirection = _direction;
 }
-
 void sng::SnakeGame::spawnApple() noexcept {
     std::uniform_int_distribution<> distributionX(0, mapSize.x-1);
     std::uniform_int_distribution<> distributionY(0, mapSize.y-1);

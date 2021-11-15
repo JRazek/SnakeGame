@@ -4,7 +4,7 @@
 using namespace sng;
 using namespace std;
 int main() {
-    SnakeGame snakeGame(30, 30, 2, false);
+    SnakeGame snakeGame(30, 30, 100, false);
     snakeGame.spawnApple();
     snakeGame.spawnApple();
     SnakeGameVisualiser snakeGameVisualiser(snakeGame);

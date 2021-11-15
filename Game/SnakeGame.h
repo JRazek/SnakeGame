@@ -27,6 +27,11 @@ namespace sng {
         Vec2Set snakePoints;
         SnakeObj snake;
 
+
+        /**
+         * buffer is necessary in order to prevent double turn resulting in changing direction by 180 degrees
+         */
+        SnakeDirection bufferedDirection;
     public:
         SnakeGame(int _sizeX, int _sizeY, int seed = 1, bool _solidWalls = true) noexcept;
         void incTimeStep();
