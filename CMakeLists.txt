@@ -10,9 +10,9 @@ target_link_libraries(Snake SnakeGame)
 install(TARGETS SnakeGame)
 
 install(
-        DIRECTORY "${CMAKE_SOURCE_DIR}/Game" # source directory
-        DESTINATION "include/SnakeGame" # target directory
-        FILES_MATCHING # install only matched files
-        PATTERN "*.h" # select header files
+        DIRECTORY "${CMAKE_SOURCE_DIR}/Game"
+        DESTINATION "include/SnakeGame"
+        FILES_MATCHING
+        PATTERN "*.h"
         PATTERN "build" EXCLUDE
         )
