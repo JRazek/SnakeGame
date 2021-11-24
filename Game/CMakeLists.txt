@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 option(SFML "SFML MODE" ON)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -Wall -Wextra -Werror=vla")
-
+set(SFML_STATIC_LIBRARIES TRUE)
 
 if(SFML)
     add_library(SnakeGame Utils.h Utils.cpp SnakeGame.h SnakeGame.cpp SnakeGameVisualiser.h SnakeGameVisualiser.cpp SnakeDirection.h GameStatus.h)
