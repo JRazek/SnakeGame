@@ -7,8 +7,14 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 add_executable(Snake main.cpp)
 target_link_libraries(Snake SnakeGame)
 
-install(TARGETS SnakeGame)
 
+
+
+
+
+
+
+install(TARGETS SnakeGame)
 install(
         DIRECTORY "${CMAKE_SOURCE_DIR}/Game"
         DESTINATION "include/SnakeGame"

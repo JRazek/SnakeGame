@@ -22,7 +22,7 @@ namespace sng {
 
         sf::Color snakeColor = sf::Color::Green;
         sf::Color applesColor = sf::Color::Red;
-        sf::Color backgroundColor = sf::Color(128, 128, 128);
+        sf::Color backgroundColor{128, 128, 128};
         static constexpr Vector2f tileSize{10, 10};
     public:
         explicit SnakeGameVisualiser(SnakeGame &snakeGame, const std::string& windowName = "snake game");
