@@ -13,16 +13,16 @@ sng::SnakeGameVisualiser::SnakeGameVisualiser(SnakeGame &snakeGame, const std::s
 
 void sng::SnakeGameVisualiser::draw() {
     window.clear(backgroundColor);
-    for (auto &s : snakeGame.getSnake()) {
-        sf::RectangleShape rectangleShape({tileSize.x, tileSize.y});
-        rectangleShape.setFillColor(snakeColor);
-        rectangleShape.setPosition({static_cast<float>(s.x)*tileSize.x, static_cast<float>(s.y)*tileSize.y});
-        window.draw(rectangleShape);
-    }
     for (auto &a : snakeGame.getApples()) {
         sf::RectangleShape rectangleShape({tileSize.x, tileSize.y});
         rectangleShape.setFillColor(applesColor);
         rectangleShape.setPosition({static_cast<float>(a.x)*tileSize.x, static_cast<float>(a.y)*tileSize.y});
+        window.draw(rectangleShape);
+    }
+    for (auto &s : snakeGame.getSnake()) {
+        sf::RectangleShape rectangleShape({tileSize.x, tileSize.y});
+        rectangleShape.setFillColor(snakeColor);
+        rectangleShape.setPosition({static_cast<float>(s.x)*tileSize.x, static_cast<float>(s.y)*tileSize.y});
         window.draw(rectangleShape);
     }
 
