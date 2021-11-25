@@ -8,10 +8,13 @@ option(SFML "SFML MODE" ON)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -Wall -Wextra -Werror=vla")
 
+set(SNAKE_FILES Utils.cpp SnakeGame.cpp)
+set(VISUALISER_FILES SnakeGameVisualiser.cpp)
+
+add_library(SnakeGame SHARED ${SNAKE_FILES})
+
 if(SFML)
-    add_library(SnakeGame Utils.h Utils.cpp SnakeGame.h SnakeGame.cpp SnakeGameVisualiser.h SnakeGameVisualiser.cpp SnakeDirection.h GameStatus.h)
+    target_sources(SnakeGame PUBLIC ${VISUALISER_FILES})
     find_package(SFML 2.5.1 COMPONENTS system graphics audio network REQUIRED)
     target_link_libraries(SnakeGame sfml-system sfml-graphics sfml-window)
-else()
-    add_library(SnakeGame Utils.h Utils.cpp SnakeGame.h SnakeGame.cpp SnakeDirection.h GameStatus.h)
 endif()
